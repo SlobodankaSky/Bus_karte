@@ -356,3 +356,81 @@ a {
   text-align: center;
   margin-left: -2.5rem;
 }
+
+
+/*    ******************************************************    */
+
+.main {
+  text-align: center;
+  justify-content: center;
+  display: flex; 
+  padding-top: 5.625rem;
+  padding-bottom: 5.625rem;
+  background-color: #e1e3eb;
+}
+
+
+.sub-main {
+  display: flex;      
+  justify-content: center;
+ /* height: 34.375rem;      */
+  height: max-content;
+  width: 45%;               /* bilo 45%     */
+  box-shadow: 0.688rem 0.75rem 0.813rem 0.75rem rgb(207, 207, 207);
+  padding-top: 1.875rem;    
+  padding-bottom: 2rem;                        
+  border-radius: 3.75rem; 
+  background-color: white;
+  color:#290371;                    /* dodala sam   */
+}
+
+
+.okvir-na-pocetnoj{
+  justify-content: center;
+  text-align: center;
+  height: max-content;
+  width: 80%;
+  background-color: aliceblue;
+  opacity: 70%;
+  padding-top: 15rem;
+  border: #290371;
+ /* border-style: initial;
+  border-radius: 0lvh;
+  border-inline: inherit; */
+  
+}
+
+.okvir1 {
+  position: relative;
+  left: 4rem;
+  right: 5rem;
+  top: 5rem;  /* 150  ---> 100px */
+  padding: 2rem;
+  border: 1.5px solid #310380;
+  border-radius: 12px;
+  background: #fff;
+  opacity: 70%;
+  width: 75%;
+  
+}
+
+
+.h3-card {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form1{
+    position: sticky;   
+    width: 15rem;
+    left: 6rem;
+    top: 0.5rem;
+
+}
+
+.belo {
+  background-color: #fff;
+}

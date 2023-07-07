@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import RezervacijaLogic from "./rezervacija.logic";
 import classes from "../registration/registration.module.css";
 import LinijeApi from "../../api/linije.api";
+import helpers from "../../helpers/helpers";      /* dodato reda radi  sn */
 import Qrcode from "./QrCode";
 import  "../rezervacije/index1.css"
 import "./sedista/sedista.css";
@@ -188,13 +189,59 @@ const RezervacijaComponent = ({ id }) => {
     }
   };
 
-  //prevodjenje start
-  const lngs = {
+    //prevodjenje start
+    const lngs = {
     en: { nativeName: 'Engleski' }, 
     de: { nativeName: 'Srpski' }
     };
     const { t, i18n } = useTranslation();
     // prevodjenje end
+
+
+    // ubaceno jer ce da treba za izvlacenje iz baze
+
+    const [filteredLinije, setFilteredLinije] = useState([]);
+    const [valueDate, setValueDate] = useState("");
+    const [val1, setVal1] = useState("");
+    const [val2, setVal2] = useState("");
+    const [polasci, setPolasci] = useState([]);
+    const [dolasci, setDolasci] = useState([]);
+    const [linije, setLinije] = useState([]);
+
+
+    const filterLinija = async () => {
+      if (!valueDate) return;
+  
+      const response = await LinijeApi().filterLinija(val1, val2, valueDate);   
+      const data = await response.json();
+      setFilteredLinije(data);
+      
+    };
+
+
+    const getLinije = async () => {
+      const response = await fetch("http://localhost:5000/linije/linija"); //izvlacenje svih linija iz baze
+      const data = await response.json(); //
+      const mestaPolaska = data //
+        .map((item) => item.mestoPolaska) //Uradjen filter da se u selektu ne ponavljaju linije
+        .filter(helpers.filterUnique); // za mesto polaska
+      const mestaDolaska = data //
+        .map((item) => item.mestoDolaska) //Uradjen filter da se u selektu ne ponavljaju linije
+        .filter(helpers.filterUnique); //za mesto dolaska
+  
+      setLinije(data);
+      setPolasci(mestaPolaska);
+      setDolasci(mestaDolaska);
+      setVal1(data[0].mestoPolaska);
+      setVal2(data[0].mestoDolaska);
+  
+    };
+
+   
+
+    // kraj bloka sn
+
+
 
   return (
     <>
@@ -420,16 +467,37 @@ const RezervacijaComponent = ({ id }) => {
       {showReturnDate && (
         <div className="ograda" >
           
-          <label className="labela">Mesto polaska : </label> {linija.mestoDolaska}<br/>
-          <label className="labela">Mesto dolaska : </label> {linija.mestoPolaska}<br/>
-          <label htmlFor="returnDate" className="labela">Datum povratka : </label>
+          <label style={{color: "darkblue"}}>Mesto polaska : </label> {linija.mestoDolaska}<br/>
+          <label style={{color: "darkblue"}}>Mesto dolaska : </label> {linija.mestoPolaska}<br/>
+          <label htmlFor="returnDate" style={{color: "darkblue"}} >Datum povratka : </label>
           <input type="date" id="returnDate" name="returnDate"  min={new Date().toISOString().split('T')[0]} style={{width:"6.5rem"}} />
-          <label className="labela">Vreme povratka : </label> <label className="labela"> Broj mesta</label><br/>
-           <input type="checkbox"/>  {linija.vremePolaska} <label className="labela">-- </label>
+          <br/>
+          <label style={{color: "darkblue"}}>Vreme polaska  -- Vreme dolaska ::: Broj mesta</label><br/><hr/><br/>
+      {/*    {linija.vremePolaska} -- {linija.vremeDolaska}  &nbsp; :::{linija.brojSlobodanih}  &emsp;        
+           <input type="checkbox"/>     */}
+ 
+            {/*  da dobijemo spisak povratnih linija     */}   
 
 
 
-          
+            <ul>
+                {filteredLinije.map((linija)=>{
+                    return(
+                      <div>
+                          <li key={linija.id}>
+                              
+                              {linija.vremePolaska}
+                              <label>--</label>
+                              {linija.vremeDolaska}
+                              <input type="checkbox"/>  
+                              <label> XYX </label>
+                          </li>
+                      </div>
+                    )
+                })}
+              </ul> 
+            
+    {/*       */}   
         </div>
         
       )} 

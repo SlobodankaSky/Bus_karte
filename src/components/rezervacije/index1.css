@@ -135,7 +135,7 @@
   border-color: darkblue;
   border-width: 2px;
   border-style: double;
-  width: 16rem;
+  width: 16rem;           /*  16rem , 50vW  */
   padding: 5px;
   text-align: left;
   margin: auto;

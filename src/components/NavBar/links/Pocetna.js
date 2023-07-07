@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import bus1 from '../../images/bus1.jpg'
 import bus2 from '../../images/bus2.jpg'
 
+import pozadina from '../../images/put1.jpg';
+import pozadina2 from '../../images/put2.jpg';
+
 import './i18n'; // za prevodjenje
 import '../../rezervacije/i18n';
 import { useTranslation, Trans } from 'react-i18next';    //prevodjenje
@@ -294,7 +297,7 @@ function Povratak(props){
   return (
     
 
-    <div >
+    <div style={{ backgroundImage: `url(${pozadina2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} >
       {/*  header je deo za prevodjenje*/}
       <header>
         <div style={{textAlign:"right", marginRight:"3rem"}}>
@@ -573,9 +576,10 @@ function Povratak(props){
               );
             })}
            {<PovratnaKarta karta={karta}/>}
-    {/*       {karta=='return'? "Red vožnje za povratnu liniju ": " "}      */}
+           {karta=='return'? "Red vožnje za povratnu liniju ": " "}      
            <br/>
 
+    {/*
            {filteredLinije.map((linija) => {
               return (
                 <li key={linija.id}>
@@ -614,7 +618,7 @@ function Povratak(props){
                 </li>
               );
             })}
-
+    */}  
 
     {/*       {StampajPovratke()}     */}
 
@@ -687,7 +691,7 @@ function Povratak(props){
 
       
       <div className="bus-container">
-      <img src={slides[currentSlide]} alt="Slideshow" className="bus-image" style={{height: "auto"}}/>
+      <img src={slides[currentSlide]} alt="Slideshow" className="bus-image" style={{height: "auto", opacity:"130%"}}/>
       </div>
     </div>
     </div>

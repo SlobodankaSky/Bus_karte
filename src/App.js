@@ -19,6 +19,7 @@ import BusInitional from "./components/admin/bus.initional";
 import BusAdd from "./components/admin/bus.add";
 import BusChangeLine from "./components/admin/bus.change.line";
 import AdminPanel from "./components/admin/admin.panel";
+import Pocetna_nova from "./components/NavBar/links/Pocetna_nova";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/pocetna">
               <Pocetna />
+            </Route>
+            <Route path="/pocetna_nova">
+              <Pocetna_nova />
             </Route>
             <Route path="/informacije">
               <Informacije />
